@@ -1,0 +1,10 @@
+main/java/Lambda/LambdaProvider.java
+ main.java.Lambda.LambdaProvider
+main/java/Meme.java
+ main.java.Meme
+main/java/jsonParser.java
+ main.java.jsonParser
+main/java/main.java
+ main.java.main
+main/java/MemeDao.java
+ main.java.MemeDao

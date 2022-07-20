@@ -1,0 +1,140 @@
+openapi: 3.0.0
+info:
+  title: Horrible Meme Horoscope API
+  version: 0.0.15
+  
+paths:
+  /memeTable/{memeName}:
+    get:
+      description: Get a specified meme's url
+      parameters:
+        - name: memeName
+          in: path
+          description: memeName is a unique name for a meme's image url
+          required: true
+          schema:
+            type: string
+            example: meme1
+            
+      responses:
+        '201':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Meme'
+        '400':
+          description: Failed Operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Meme name not found, please supply valid meme name
+
+  /memeTable/:
+    get:
+      description: Get a random meme's url
+
+      responses:
+        '201':
+          description: Succesful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/Meme'
+                    
+                    
+  /memeLikedList/{email}:
+    get:
+      description: Get a specified users liked list of memes via email      
+      parameters:
+        - name: email
+          in: path
+          description: email represents a users identity
+          required: true
+          schema:
+            type: string
+            example: user@gmail.com
+      responses:
+        '201':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/MemeLikedList'
+        '400':
+          description: Failed Operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: email not found, please supply valid email      
+    put:
+      description: Create or update an existing users liked meme list
+      
+      parameters:
+        - name: email
+          in: path
+          description: email represents a user identity
+          required: true
+          schema:
+            type: string
+            example: user@gmail.com
+        - name: memeLikedList
+          in: query
+          description: optional attachment of a list of liked memes
+          required: false
+          schema:
+            type: array
+            items:
+              type: object
+              example: [likedmemeurl1.com, likedmemeurl2.com]
+      responses:
+        '201':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                $ref: '#/components/schemas/MemeLikedList'
+              
+    
+    
+    
+    
+components:
+  schemas:
+    Meme:
+      type: object
+      properties:
+        memeName:
+          type: string
+        imageLink:
+          type: string
+    MemeLikedList:
+      type: object
+      properties:
+        memeLikedList:
+          type: array
+          items:
+            type: string
+            example: [memeurl1.com, memeurl2.com, memeurl3.com]
+    
+        
+        
+        
+        
+    
